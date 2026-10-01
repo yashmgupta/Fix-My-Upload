@@ -1,0 +1,64 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Prepare static site and SEO URLs
+        shell: bash
+        run: |
+          set -euo pipefail
+          OWNER="${GITHUB_REPOSITORY_OWNER}"
+          REPO="${GITHUB_REPOSITORY#*/}"
+          if [ "$REPO" = "$OWNER.github.io" ]; then
+            SITE_URL="https://$OWNER.github.io/"
+          else
+            SITE_URL="https://$OWNER.github.io/$REPO/"
+          fi
+          export SITE_URL
+
+          mkdir -p _site
+          rsync -a --delete             --exclude '.git/'             --exclude '.github/'             --exclude '_site/'             ./ _site/
+
+          python - <<'PYBUILD'
+          from pathlib import Path
+          import os
+          site_url = os.environ['SITE_URL']
+          for name in ['index.html', '404.html', 'robots.txt', 'sitemap.xml']:
+              p = Path('_site') / name
+              text = p.read_text(encoding='utf-8')
+              p.write_text(text.replace('__SITE_URL__', site_url), encoding='utf-8')
+          print('Publishing:', site_url)
+          PYBUILD
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./_site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
