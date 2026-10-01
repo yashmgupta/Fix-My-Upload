@@ -1,0 +1,313 @@
+<!doctype html>
+<!-- Fix My Upload — Concept & implementation © 2026 Yash M Gupta. All rights reserved. -->
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#f6f1e8" />
+  <meta name="description" content="ลดขนาดและปรับรูปให้ตรงเงื่อนไขอัปโหลด เช่น JPG, 35–50 KB, 100 KB หรือ 300×400 px สำหรับสมัครเรียน สมัครสอบ และสมัครงาน โดยประมวลผลบนอุปกรณ์ของคุณ" />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="author" content="Yash M Gupta" />
+  <meta name="copyright" content="© 2026 Yash M Gupta. All rights reserved." />
+  <meta name="application-name" content="Fix My Upload" />
+  <meta name="apple-mobile-web-app-title" content="Fix My Upload" />
+  <meta name="format-detection" content="telephone=no" />
+
+  <title>ทำไฟล์ให้ผ่าน | ลดขนาดรูปตาม KB และพิกเซล</title>
+  <link rel="canonical" href="__SITE_URL__" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fix My Upload" />
+  <meta property="og:locale" content="th_TH" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:title" content="ทำไฟล์ให้ผ่าน | Fix My Upload" />
+  <meta property="og:description" content="วางเงื่อนไขของเว็บไซต์ แล้วตรวจ ปรับขนาด แปลงรูป และบีบอัดไฟล์ให้พร้อมอัปโหลด — ทำงานบนอุปกรณ์ของคุณ" />
+  <meta property="og:url" content="__SITE_URL__" />
+  <meta property="og:image" content="__SITE_URL__og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Fix My Upload — browser-based image requirement checker and fixer" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="ทำไฟล์ให้ผ่าน | Fix My Upload" />
+  <meta name="twitter:description" content="ตรวจและปรับรูปให้ตรงเงื่อนไข KB, MB, JPG และพิกเซล โดยไม่อัปโหลดไฟล์ขึ้นเซิร์ฟเวอร์" />
+  <meta name="twitter:image" content="__SITE_URL__og-image.png" />
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="icon-192.png" sizes="192x192" type="image/png" />
+  <link rel="apple-touch-icon" href="icon-192.png" />
+  <link rel="manifest" href="site.webmanifest" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&family=Noto+Serif+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "ทำไฟล์ให้ผ่าน — Fix My Upload",
+    "url": "__SITE_URL__",
+    "description": "A privacy-first browser tool that checks and adjusts image format, file size and pixel dimensions to match website upload requirements.",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Any",
+    "browserRequirements": "Requires JavaScript and a modern web browser",
+    "inLanguage": ["th", "en"],
+    "isAccessibleForFree": true,
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "THB"
+    },
+    "creator": {
+      "@type": "Person",
+      "name": "Yash M Gupta"
+    },
+    "copyrightHolder": {
+      "@type": "Person",
+      "name": "Yash M Gupta"
+    },
+    "copyrightYear": "2026",
+    "image": "__SITE_URL__og-image.png",
+    "featureList": [
+      "Image upload requirement detection",
+      "JPG PNG and WebP conversion",
+      "Target KB and MB file size adjustment",
+      "Exact pixel dimension resizing",
+      "Local browser processing"
+    ]
+  }
+  </script>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="Fix My Upload home">
+        <span class="brand-mark" aria-hidden="true">↥</span>
+        <span class="brand-copy">
+          <strong lang="th">ทำไฟล์ให้ผ่าน</strong>
+          <small lang="en">Fix My Upload</small>
+        </span>
+      </a>
+      <nav class="desktop-nav" aria-label="Primary navigation">
+        <a href="#tool" lang="th">เครื่องมือ</a>
+        <a href="#how" lang="th">วิธีใช้</a>
+        <a href="#privacy" lang="th">ความเป็นส่วนตัว</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <p class="eyebrow" lang="en">UPLOAD-READY FILES, WITHOUT THE GUESSWORK</p>
+        <h1 id="hero-title" lang="th">ทำไฟล์ให้ผ่าน</h1>
+        <p class="hero-subtitle" lang="th">ตรวจและปรับรูปให้ตรงเงื่อนไขของเว็บไซต์ เช่น JPG, 35–50 KB, 100 KB หรือ 300 × 400 px — เหมาะสำหรับสมัครเรียน สมัครสอบ สมัครงาน และแบบฟอร์มออนไลน์</p>
+        <p class="hero-subtitle hero-subtitle-en" lang="en">Choose a file, paste what the website asks for—or select the rules yourself. The app checks and fixes the image locally in your browser.</p>
+        <div class="privacy-pill" id="privacy">
+          <span class="privacy-icon" aria-hidden="true">⌁</span>
+          <div>
+            <strong lang="th">ไฟล์ไม่ออกจากอุปกรณ์ของคุณ</strong>
+            <small lang="en">No server upload. No account required.</small>
+          </div>
+        </div>
+      </section>
+
+      <section class="workspace" id="tool">
+        <article class="card upload-card">
+          <div class="section-heading">
+            <span class="step-number">1</span>
+            <div>
+              <h2 lang="th">เลือกไฟล์</h2>
+              <p lang="en">Choose an image</p>
+            </div>
+          </div>
+
+          <input id="fileInput" type="file" accept="image/jpeg,image/png,image/webp" hidden />
+          <button class="drop-zone" id="dropZone" type="button">
+            <span class="upload-icon" aria-hidden="true">↥</span>
+            <strong lang="th">เลือกไฟล์ หรือวางไฟล์ที่นี่</strong>
+            <span lang="en">Choose a file or drop it here</span>
+            <small>JPG · PNG · WEBP · up to 30 MB</small>
+          </button>
+
+          <div class="file-preview hidden" id="filePreview">
+            <div class="preview-frame"><img id="previewImage" alt="Selected image preview" /></div>
+            <div class="file-meta">
+              <strong id="fileName">—</strong>
+              <span id="fileDetails">—</span>
+              <button class="ghost-button" id="changeFileButton" type="button">เปลี่ยนไฟล์ <span>· Change file</span></button>
+            </div>
+          </div>
+          <p class="helper-text" id="fileMessage"></p>
+        </article>
+
+        <article class="card requirement-card">
+          <div class="section-heading">
+            <span class="step-number">2</span>
+            <div>
+              <h2 lang="th">กำหนดเงื่อนไข</h2>
+              <p lang="en">Paste the website rule or select it manually</p>
+            </div>
+          </div>
+
+          <div class="mode-tabs" role="tablist" aria-label="Requirement input mode">
+            <button class="mode-tab active" type="button" role="tab" aria-selected="true" data-panel="pastePanel">วางข้อความ <span>Paste</span></button>
+            <button class="mode-tab" type="button" role="tab" aria-selected="false" data-panel="manualPanel">เลือกเอง <span>Select</span></button>
+          </div>
+
+          <div id="pastePanel" class="mode-panel">
+            <label class="field-label" for="requirementInput" lang="th">วางข้อความจากเว็บไซต์</label>
+            <textarea id="requirementInput" rows="5" maxlength="2000" placeholder="เช่น: รูป JPG ขนาดไม่น้อยกว่า 35 KB และไม่เกิน 50 KB ขนาด 300 × 400 px"></textarea>
+            <div class="paste-actions">
+              <button class="secondary-button" id="detectButton" type="button">ตรวจจับเงื่อนไข <span>Detect rules</span></button>
+              <span class="character-count" id="characterCount">0 / 2000</span>
+            </div>
+            <p class="helper-text">ถ้าระบบอ่านไม่ครบ คุณแก้ค่าที่ตรวจพบได้ด้านล่างเสมอ</p>
+          </div>
+
+          <div id="manualPanel" class="mode-panel hidden">
+            <p class="helper-text top-helper">Use the controls below directly. Nothing depends on understanding free-form text.</p>
+          </div>
+
+          <div class="rule-editor" id="ruleEditor">
+            <div class="rule-editor-header">
+              <div>
+                <strong lang="th">เงื่อนไขที่ใช้จริง</strong>
+                <span lang="en">Editable detected rules</span>
+              </div>
+              <button class="text-action" id="clearRulesButton" type="button">ล้างค่า · Clear</button>
+            </div>
+
+            <div class="rule-grid">
+              <label class="control-group">
+                <span>รูปแบบไฟล์ <small>Format</small></span>
+                <select id="formatSelect">
+                  <option value="KEEP">ไม่บังคับ / Keep original</option>
+                  <option value="JPG">JPG</option>
+                  <option value="PNG">PNG</option>
+                  <option value="WEBP">WEBP</option>
+                </select>
+              </label>
+
+              <label class="control-group">
+                <span>เงื่อนไขขนาดไฟล์ <small>File size rule</small></span>
+                <select id="sizeRuleSelect">
+                  <option value="NONE">ไม่กำหนด / No limit</option>
+                  <option value="MAX">ไม่เกิน / Maximum</option>
+                  <option value="RANGE">ช่วง / Range</option>
+                </select>
+              </label>
+
+              <div class="control-group size-controls hidden" id="sizeControls">
+                <span>ขนาดไฟล์ <small>File size</small></span>
+                <div class="inline-fields">
+                  <label class="number-field hidden" id="minSizeWrap"><span class="sr-only">Minimum size</span><input id="minSizeInput" inputmode="decimal" type="number" min="1" step="1" placeholder="35"></label>
+                  <span class="range-separator hidden" id="rangeSeparator">–</span>
+                  <label class="number-field"><span class="sr-only">Maximum size</span><input id="maxSizeInput" inputmode="decimal" type="number" min="1" step="1" placeholder="100"></label>
+                  <select id="sizeUnitSelect" class="unit-select"><option>KB</option><option>MB</option></select>
+                </div>
+              </div>
+
+              <label class="control-group">
+                <span>ขนาดพิกเซล <small>Dimensions</small></span>
+                <select id="dimensionRuleSelect">
+                  <option value="NONE">ไม่กำหนด / Any size</option>
+                  <option value="EXACT">กำหนดแน่นอน / Exact</option>
+                </select>
+              </label>
+
+              <div class="control-group dimension-controls hidden" id="dimensionControls">
+                <span>กว้าง × สูง <small>Width × height</small></span>
+                <div class="inline-fields">
+                  <label class="number-field"><span class="sr-only">Width</span><input id="widthInput" inputmode="numeric" type="number" min="1" max="10000" step="1" placeholder="300"></label>
+                  <span>×</span>
+                  <label class="number-field"><span class="sr-only">Height</span><input id="heightInput" inputmode="numeric" type="number" min="1" max="10000" step="1" placeholder="400"></label>
+                  <span class="unit-label">px</span>
+                </div>
+                <label class="sub-control">การจัดวางรูป
+                  <select id="fitModeSelect">
+                    <option value="CONTAIN">Fit + white padding (safer)</option>
+                    <option value="COVER">Crop to fill</option>
+                  </select>
+                </label>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="card analysis-card hidden" id="analysisCard" aria-live="polite">
+          <div class="section-heading compact">
+            <span class="step-number">3</span>
+            <div>
+              <h2 lang="th">ตรวจไฟล์</h2>
+              <p lang="en">Current file vs. selected requirements</p>
+            </div>
+          </div>
+          <div class="comparison-list" id="comparisonList"></div>
+          <div class="status-panel" id="statusPanel">
+            <div>
+              <strong id="statusTitle">—</strong>
+              <p id="statusText">—</p>
+            </div>
+            <span class="status-badge" id="statusBadge">—</span>
+          </div>
+          <button class="primary-button hidden" id="fixButton" type="button">
+            <span><b lang="th">แก้ไฟล์ให้ผ่าน</b><small lang="en">Fix my file</small></span>
+            <i aria-hidden="true">→</i>
+          </button>
+        </article>
+
+        <article class="card processing-card hidden" id="processingCard" aria-live="polite">
+          <div class="progress-ring" id="progressRing" style="--progress: 8"><span id="progressText">8%</span></div>
+          <h2 lang="th">กำลังปรับไฟล์…</h2>
+          <p id="processingText" lang="en">Preparing your image locally.</p>
+        </article>
+
+        <article class="card success-card hidden" id="successCard" aria-live="polite">
+          <div class="success-icon" id="resultIcon" aria-hidden="true">✓</div>
+          <p class="eyebrow" id="resultEyebrow" lang="en">READY TO UPLOAD</p>
+          <h2 id="resultTitle" lang="th">พร้อมอัปโหลด</h2>
+          <p id="successDetails">—</p>
+          <div class="success-actions">
+            <a class="primary-button download-button" id="downloadButton" href="#" download>
+              <span><b lang="th">ดาวน์โหลดไฟล์</b><small lang="en">Download file</small></span>
+              <i aria-hidden="true">↓</i>
+            </a>
+            <button class="secondary-button full" id="startOverButton" type="button">แก้ไฟล์อื่น <span>· Fix another file</span></button>
+          </div>
+        </article>
+      </section>
+
+      <section class="info-section" aria-labelledby="use-cases-title">
+        <div class="info-copy">
+          <p class="eyebrow" lang="en">COMMON UPLOAD REQUIREMENTS</p>
+          <h2 id="use-cases-title" lang="th">ใช้เมื่อเว็บไซต์กำหนดขนาดรูปหรือไฟล์</h2>
+          <p lang="th">ถ้าระบบสมัครเรียน สมัครสอบ สมัครงาน หรือแบบฟอร์มออนไลน์กำหนดให้รูปเป็น JPG, ต้องไม่เกิน 50 KB / 100 KB / 2 MB หรือระบุขนาดพิกเซล เช่น 300 × 400 px คุณสามารถวางข้อความเงื่อนไขแล้วตรวจไฟล์ได้ทันที</p>
+          <p lang="en">The tool converts the requirement into editable rules first, so unclear or unusual wording does not control processing directly.</p>
+        </div>
+        <div class="example-rules" aria-label="Examples of supported upload requirements">
+          <span>JPG · 35–50 KB</span>
+          <span>≤ 100 KB</span>
+          <span>≤ 2 MB</span>
+          <span>300 × 400 px</span>
+          <span>PNG → JPG</span>
+        </div>
+      </section>
+
+      <section class="how-section" id="how">
+        <div class="how-item"><span>01</span><strong lang="th">เลือกไฟล์</strong><p lang="en">Pick the image the website rejected.</p></div>
+        <div class="how-item"><span>02</span><strong lang="th">กำหนดเงื่อนไข</strong><p lang="en">Paste the message or choose the rules manually.</p></div>
+        <div class="how-item"><span>03</span><strong lang="th">ตรวจและแก้</strong><p lang="en">The browser converts, resizes and compresses locally.</p></div>
+      </section>
+    </main>
+
+    <footer>
+      <span>© 2026 Yash M Gupta · Fix My Upload</span>
+      <span>Concept & implementation by Yash M Gupta · All rights reserved.</span>
+    </footer>
+  </div>
+
+  <div class="toast hidden" id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>

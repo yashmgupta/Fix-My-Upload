@@ -1,0 +1,7 @@
+Copyright © 2026 Yash M Gupta. All rights reserved.
+
+Fix My Upload: concept, interface design, source code, documentation, branding, and original written content are proprietary to Yash M Gupta unless otherwise stated.
+
+No permission is granted to copy, modify, redistribute, sublicense, sell, or create derivative works from this repository except with prior written permission from the copyright holder.
+
+This notice does not claim exclusive ownership of general ideas, facts, algorithms, web standards, or third-party technologies that are not protectable by copyright or are owned by others.
