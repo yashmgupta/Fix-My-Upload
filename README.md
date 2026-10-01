@@ -1,61 +1,92 @@
-# Fix My Upload — V3 GitHub-ready
+# Fix My Upload
 
-**Concept & implementation © 2026 Yash M Gupta. All rights reserved.**
+A privacy-first browser tool for fixing image upload issues without sending files to a server.
 
-A privacy-first static web app that checks and adjusts images to match upload requirements such as JPG, 35–50 KB, 100 KB, 2 MB, or 300 × 400 px.
+This app helps you check and adjust images to meet upload requirements such as:
 
-## V3 launch additions
-- `sitemap.xml`
-- `robots.txt`
-- self-canonical URL generated automatically during GitHub Pages deployment
-- Open Graph + Twitter social metadata
-- `WebApplication` JSON-LD structured data
-- `site.webmanifest`
-- favicon + 192/512 PWA icons
-- 1200×630 social preview image
-- `404.html` with `noindex`
-- `.nojekyll`
-- GitHub Actions Pages deployment workflow
-- visible search-focused explanatory copy without keyword stuffing
-- copyright / ownership notice for Yash M Gupta
-- All Rights Reserved `LICENSE.txt`
+- JPG / PNG / WebP conversion
+- file size limits like 35 KB, 100 KB, 2 MB, etc.
+- exact pixel dimensions such as 300 × 400 px
+- local browser-based processing only
 
-## Deploy on GitHub Pages
-1. Create a GitHub repository and copy all files from this folder into it.
-2. Use `main` as the default branch.
-3. Push the repository.
-4. In **Settings → Pages**, set the build/deployment source to **GitHub Actions** if GitHub does not select it automatically.
-5. The included workflow calculates the correct GitHub Pages URL from the repository owner/name, replaces `__SITE_URL__` in the canonical tag, Open Graph metadata, JSON-LD, `robots.txt`, `sitemap.xml`, and the 404 link, then deploys the finished site.
+## Features
 
-This works both for:
-- `https://USERNAME.github.io/REPOSITORY/`
-- a user site repository named `USERNAME.github.io`
+- Upload JPG, PNG, or WebP images
+- Detect common upload requirements from pasted website text
+- Manually edit the detected rules before processing
+- Convert format, resize dimensions, and optimize file size
+- Keep work entirely in the browser
+- Download a processed image ready for upload
 
-## After the site is live: Google Search Console
-Technical SEO files make the site crawlable and understandable, but **they do not guarantee rankings**.
+## How it works
 
-After deployment:
-1. Add the live URL to Google Search Console.
-2. Use **URL Inspection** on the homepage and request indexing.
-3. Submit `sitemap.xml` in the Sitemaps report.
-4. Validate the page in Google Rich Results Test.
-5. Monitor queries and impressions before adding more search landing pages.
+1. Choose an image file.
+2. Paste the upload requirement from the website, or select the rules manually.
+3. Review the detected conditions.
+4. Click "Fix my file" to process the image locally.
+5. Download the corrected image.
 
-## Local test
+## Local development
+
+Run a local web server in the project root:
+
 ```bash
 python -m http.server 8000
 ```
-Open `http://localhost:8000`.
 
-`__SITE_URL__` is intentionally left as a template in the source repository. The GitHub Actions workflow replaces it only in the deployed `_site` artifact, so you do not need to know the final GitHub username/repository URL in advance.
+Then open:
 
-## V3 processing support
-- Input: JPG, PNG, WebP
-- Output: JPG, PNG, WebP
-- Thai/English requirement parsing for common format, min/max/range size, and exact pixel dimensions
-- Paste mode always converts text into editable structured rules before processing
-- Manual Select mode remains the fallback for unusual wording
-- Browser-only processing; no image backend required
+```text
+http://localhost:8000
+```
 
-## Copyright
-See `LICENSE.txt`. The repository is **not open source** unless the copyright holder grants a separate license.
+## GitHub Pages deployment
+
+This project is designed to work well on GitHub Pages as a static site.
+
+1. Push the repository to GitHub.
+2. Open the repository settings.
+3. Go to Pages.
+4. Set the deployment source to GitHub Actions if needed.
+5. Deploy and open the generated Pages URL.
+
+The project includes metadata and SEO support files such as:
+
+- `robots.txt`
+- `sitemap.xml`
+- `site.webmanifest`
+- `404.html`
+- `favicon.svg`
+- social preview metadata
+
+## Privacy
+
+Files are processed locally in the browser. Nothing is uploaded to a backend server.
+
+## Project structure
+
+```text
+.
+├── app.js
+├── index.html
+├── styles.css
+├── README.md
+├── robots.txt
+├── sitemap.xml
+├── site.webmanifest
+├── 404.html
+├── favicon.svg
+├── icon-192.png
+├── icon-512.png
+├── og-image.png
+├── LICENSE.txt
+└── .nojekyll
+```
+
+## License
+
+This repository is protected by copyright. See `LICENSE.txt` for details.
+
+## Notes
+
+This app is intended for image-processing workflows and is optimized for browser-based upload requirements rather than server-side processing.
