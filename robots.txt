@@ -1,4 +1,19 @@
 User-agent: *
 Allow: /
 
+Disallow: /.git
+Disallow: /.github
+
 Sitemap: __SITE_URL__sitemap.xml
+
+# Thai search engine support
+User-agent: Bing
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+# Thailand-specific crawlers
+User-agent: Yandex
+Allow: /
