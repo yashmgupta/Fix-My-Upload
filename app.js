@@ -13,9 +13,10 @@
     formatSelect: $("formatSelect"), sizeRuleSelect: $("sizeRuleSelect"), sizeControls: $("sizeControls"), minSizeWrap: $("minSizeWrap"),
     minSizeInput: $("minSizeInput"), maxSizeInput: $("maxSizeInput"), sizeUnitSelect: $("sizeUnitSelect"), rangeSeparator: $("rangeSeparator"),
     dimensionRuleSelect: $("dimensionRuleSelect"), dimensionControls: $("dimensionControls"), widthInput: $("widthInput"), heightInput: $("heightInput"), fitModeSelect: $("fitModeSelect"),
-    analysisCard: $("analysisCard"), comparisonList: $("comparisonList"), statusPanel: $("statusPanel"), statusTitle: $("statusTitle"), statusText: $("statusText"), statusBadge: $("statusBadge"), fixButton: $("fixButton"),
-    processingCard: $("processingCard"), progressRing: $("progressRing"), progressText: $("progressText"), processingText: $("processingText"),
-    successCard: $("successCard"), successDetails: $("successDetails"), resultIcon: $("resultIcon"), resultEyebrow: $("resultEyebrow"), resultTitle: $("resultTitle"), downloadButton: $("downloadButton"), startOverButton: $("startOverButton"), toast: $("toast")
+    analysisCard: $("analysisCard"), comparisonList: $("comparisonList"), statusPanel: $("statusPanel"), statusTitle: $("statusTitle"), statusText: $("statusText"), statusBadge: $("statusBadge"),
+    fixButton: $("fixButton"), processingCard: $("processingCard"), progressRing: $("progressRing"), progressText: $("progressText"), processingText: $("processingText"),
+    successCard: $("successCard"), successDetails: $("successDetails"), resultIcon: $("resultIcon"), resultEyebrow: $("resultEyebrow"), resultTitle: $("resultTitle"), downloadButton: $("downloadButton"),
+    startOverButton: $("startOverButton"), toast: $("toast")
   };
 
   const MIME_TO_FORMAT = { "image/jpeg": "JPG", "image/png": "PNG", "image/webp": "WEBP" };
@@ -27,7 +28,12 @@
   };
 
   function showToast(message) {
-    els.toast.textContent = message;
+    if (!els.toast) return;
+
+    const text = String(message ?? "").trim();
+    if (!text) return;
+
+    els.toast.textContent = text;
     els.toast.classList.remove("hidden");
     clearTimeout(showToast.timer);
     showToast.timer = setTimeout(() => els.toast.classList.add("hidden"), 3500);
@@ -455,7 +461,7 @@
     } catch (error) {
       console.error("Processing stopped safely:", error);
       els.processingCard.classList.add("hidden");
-      showToast("ไม่สามารถประมวลผลไฟล์นี้ได้ แต่แอปไม่เสียหาย กรุณาลองไฟล์หรือเงื่อนไขอื่น");
+      showToast("ไม่สามารถประมวลผลไฟล์นี้ได้ แต่แอปไม่เสียหาย กรุณาลองไฟล์หรือเปลี่ยนการตั้งค่าอีกครั้ง");
     } finally {
       els.fixButton.disabled = false;
     }
@@ -491,7 +497,7 @@
   els.detectButton.addEventListener("click", () => {
     const parsed = parseRequirementText(els.requirementInput.value);
     setControlsFromParsed(parsed);
-    if (!parsed.format && !parsed.minBytes && !parsed.maxBytes && !parsed.width) showToast("ยังอ่านเงื่อนไขไม่ได้ กรุณาใช้แท็บ ‘เลือกเอง’");
+    if (!parsed.format && !parsed.minBytes && !parsed.maxBytes && !parsed.width) showToast("ยังอ่านเงื่อนไขไม่ได้ กรุณาใช้แท็บเลือกเอง");
   });
 
   els.clearRulesButton.addEventListener("click", clearRules);
